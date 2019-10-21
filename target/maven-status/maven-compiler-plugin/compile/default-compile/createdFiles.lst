@@ -1,6 +1,7 @@
-com/yana/internship/TestBean.class
-com/yana/internship/TestRepositoryImpl.class
-com/yana/internship/FakeTestRepoitory.class
-com/yana/internship/TestService.class
-com/yana/internship/TestConfig.class
-com/yana/internship/TestController.class
+com/yana/internship/repository/FakeTestRepository.class
+com/yana/internship/config/WebConfig.class
+com/yana/internship/controller/TestController.class
+com/yana/internship/service/TestService.class
+com/yana/internship/config/WebInitializer.class
+com/yana/internship/repository/TestRepository.class
+com/yana/internship/bean/TestBean.class
