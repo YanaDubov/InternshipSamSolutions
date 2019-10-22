@@ -1,6 +1,7 @@
 package com.yana.internship.controller;
 
 import com.yana.internship.bean.TestBean;
+import com.yana.internship.config.BusinessLogicException;
 import com.yana.internship.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,13 @@ public class TestController {
     @PostMapping
     public void put(@RequestBody TestBean bean){
         testService.put(bean);
+    }
+
+    @PutMapping
+    protected void update(@RequestBody TestBean bean){
+        if (!testService.update(bean)){
+            throw new BusinessLogicException("Bean update failed.");
+        }
     }
 
 }

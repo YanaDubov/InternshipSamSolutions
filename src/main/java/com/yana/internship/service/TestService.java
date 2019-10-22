@@ -32,4 +32,7 @@ public class TestService {
         testRepository.put(bean);
     }
 
+    public boolean update(TestBean bean){
+        return testRepository.update(bean);
+    }
 }
