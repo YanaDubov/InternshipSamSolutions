@@ -3,10 +3,7 @@ package com.yana.internship.controller;
 import com.yana.internship.bean.TestBean;
 import com.yana.internship.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +18,24 @@ public class TestController {
         this.testService = testService;
     }
 
-    @GetMapping
+    @GetMapping()
     public @ResponseBody List<TestBean> getAll(){
         return testService.getAll();
     }
+
+    @GetMapping("/{id}")
+    public TestBean getBook(@PathVariable int id) {
+        return testService.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id){
+        testService.deleteById(id);
+    }
+
+    @PostMapping
+    public void put(@RequestParam("bean") TestBean bean){
+        testService.put(bean);
+    }
+
 }

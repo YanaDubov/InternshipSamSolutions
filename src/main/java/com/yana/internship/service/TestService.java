@@ -20,5 +20,16 @@ public class TestService {
         return all;
     }
 
+    public TestBean getById(int id){
+        return testRepository.getById(id);
+    }
+
+    public void deleteById(int id){
+        testRepository.deleteById(id);
+    }
+
+    public void put(TestBean bean){
+        testRepository.put(bean);
+    }
 
 }
