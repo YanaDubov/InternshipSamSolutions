@@ -1,13 +1,13 @@
 package com.yana.internship.repository;
 
 import com.yana.internship.bean.TestBean;
+import com.yana.internship.config.BusinessLogicException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Repository
 public class FakeTestRepository implements TestRepository {
@@ -15,17 +15,18 @@ public class FakeTestRepository implements TestRepository {
     Map<Integer, TestBean> testBeanMap = new HashMap<>();
 
     @Override
-    public boolean update(TestBean bean) {
+    public TestBean update(TestBean bean) {
         if (testBeanMap.containsKey(bean.getId())){
             testBeanMap.put(bean.getId(),bean);
-            return true;
+            return testBeanMap.get(bean.getId());
         }
-        else return false;
+        else throw new BusinessLogicException("");
     }
 
     @Override
-    public void put(TestBean bean) {
+    public TestBean create(TestBean bean) {
         testBeanMap.put(bean.getId(),bean);
+        return testBeanMap.get(bean.getId());
     }
 
     @Override
@@ -39,8 +40,11 @@ public class FakeTestRepository implements TestRepository {
     }
 
     @Override
-    public void deleteById(int id) {
+    public TestBean deleteById(int id)
+    {
+        TestBean bean = testBeanMap.get(id);
         testBeanMap.remove(id);
+        return bean;
     }
 
 }

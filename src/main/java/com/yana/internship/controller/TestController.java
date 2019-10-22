@@ -36,14 +36,12 @@ public class TestController {
 
     @PostMapping
     public void put(@RequestBody TestBean bean){
-        testService.put(bean);
+        testService.create(bean);
     }
 
     @PutMapping
     protected void update(@RequestBody TestBean bean){
-        if (!testService.update(bean)){
-            throw new BusinessLogicException("Bean update failed.");
-        }
+        testService.update(bean);
     }
 
 }

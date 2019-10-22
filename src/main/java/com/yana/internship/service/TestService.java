@@ -24,15 +24,16 @@ public class TestService {
         return testRepository.getById(id);
     }
 
-    public void deleteById(int id){
-        testRepository.deleteById(id);
+    public TestBean deleteById(int id)
+    {
+        return testRepository.deleteById(id);
     }
 
-    public void put(TestBean bean){
-        testRepository.put(bean);
+    public TestBean create(TestBean bean){
+        return testRepository.create(bean);
     }
 
-    public boolean update(TestBean bean){
-        return testRepository.update(bean);
+    public TestBean update(TestBean bean){
+         return testRepository.update(bean);
     }
 }
