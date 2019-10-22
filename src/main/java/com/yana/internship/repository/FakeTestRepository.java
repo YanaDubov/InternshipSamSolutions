@@ -15,6 +15,15 @@ public class FakeTestRepository implements TestRepository {
     Map<Integer, TestBean> testBeanMap = new HashMap<>();
 
     @Override
+    public boolean update(TestBean bean) {
+        if (testBeanMap.containsKey(bean.getId())){
+            testBeanMap.put(bean.getId(),bean);
+            return true;
+        }
+        else return false;
+    }
+
+    @Override
     public void put(TestBean bean) {
         testBeanMap.put(bean.getId(),bean);
     }

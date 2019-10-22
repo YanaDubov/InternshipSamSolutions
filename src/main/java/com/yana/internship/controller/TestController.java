@@ -34,7 +34,7 @@ public class TestController {
     }
 
     @PostMapping
-    public void put(@RequestParam("bean") TestBean bean){
+    public void put(@RequestBody TestBean bean){
         testService.put(bean);
     }
 
