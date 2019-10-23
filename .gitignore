@@ -68,4 +68,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .idea
-lab1.iml
+yana-internship-app.iml
+src/main/webapp
