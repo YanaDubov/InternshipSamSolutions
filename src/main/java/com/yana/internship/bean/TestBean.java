@@ -1,7 +1,6 @@
 package com.yana.internship.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "test")
@@ -16,6 +15,7 @@ public class TestBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String name;
 
 
