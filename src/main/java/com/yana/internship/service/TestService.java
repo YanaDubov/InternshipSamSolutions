@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 @Service
 public class TestService {
@@ -19,6 +20,7 @@ public class TestService {
         this.testRepository = testRepository;
     }
 
+    @Transactional
     public List<TestBean> getAll(){
         logger.info("Start loading all beans");
         List<TestBean> all = testRepository.getAll();
@@ -26,18 +28,21 @@ public class TestService {
         return all;
     }
 
+    @Transactional
     public TestBean getById(int id){
         TestBean bean = testRepository.getById(id);
         logger.info("Got bean by id {}", bean.getId());
         return bean;
     }
 
+    @Transactional
     public TestBean deleteById(int id)
     {
         logger.info("Delete bean by id {}", id);
         return testRepository.deleteById(id);
     }
 
+    @Transactional
     public TestBean create(TestBean bean){
 
         TestBean testBean = testRepository.create(bean);
@@ -45,6 +50,7 @@ public class TestService {
         return testBean;
     }
 
+    @Transactional
     public TestBean update(TestBean bean){
 
         TestBean testBean = testRepository.update(bean);

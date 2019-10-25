@@ -3,20 +3,22 @@ package com.yana.internship.bean;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "test")
+@Entity
+@Table(name = "test")
 public class TestBean {
+    public TestBean(int id, String name) {
+    this.id = id;
+    this.name = name;
+    }
+    public TestBean() {
+    }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    public TestBean(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
-    public TestBean() {
-    }
 
     public int getId() {
         return id;

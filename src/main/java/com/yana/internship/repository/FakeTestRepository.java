@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class FakeTestRepository implements TestRepository {
 
     Map<Integer, TestBean> testBeanMap = new HashMap<>();
