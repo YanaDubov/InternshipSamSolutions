@@ -39,11 +39,11 @@ public class FakeTestRepository implements TestRepository {
     }
 
     @Override
-    public TestEntity deleteById(int id)
+    public int deleteById(int id)
     {
         TestEntity bean = testBeanMap.get(id);
         testBeanMap.remove(id);
-        return bean;
+        return id;
     }
 
 }

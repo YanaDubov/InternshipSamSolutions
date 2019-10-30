@@ -30,7 +30,7 @@ public class TestController {
     }
 
     @DeleteMapping("/{id}")
-    public TestEntity deleteById(@PathVariable int id){
+    public int deleteById(@PathVariable int id){
 
         return testService.deleteById(id);
     }

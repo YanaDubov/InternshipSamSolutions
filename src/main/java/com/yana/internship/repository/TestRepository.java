@@ -13,6 +13,6 @@ public interface TestRepository {
 
     List<TestEntity> getAll();
 
-    TestEntity deleteById(int id);
+    int deleteById(int id);
 
 }

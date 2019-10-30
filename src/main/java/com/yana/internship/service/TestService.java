@@ -36,7 +36,7 @@ public class TestService {
     }
 
     @Transactional
-    public TestEntity deleteById(int id) {
+    public int deleteById(int id) {
         logger.info("Delete bean by id {}", id);
         return testRepository.deleteById(id);
     }

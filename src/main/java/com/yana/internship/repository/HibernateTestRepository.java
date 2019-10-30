@@ -55,10 +55,10 @@ public class HibernateTestRepository implements TestRepository {
     }
 
     @Override
-    public TestEntity deleteById(int id) {
+    public int deleteById(int id) {
         Session session = sessionFactory.getCurrentSession();
         TestEntity testEntity = session.byId(TestEntity.class).load(id);
         session.delete(testEntity);
-        return testEntity;
+        return id;
     }
 }
