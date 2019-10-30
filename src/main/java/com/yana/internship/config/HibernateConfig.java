@@ -20,11 +20,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.yana.internship"})
-public class AppContext {
+public class HibernateConfig {
 
-    @Autowired
-    private Environment environment;
+    // TODO: 2019-10-29 think about better way of configuration
+
+    private final Environment environment;
+
+    public HibernateConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {

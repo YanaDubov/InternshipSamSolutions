@@ -1,6 +1,6 @@
 package com.yana.internship.service;
 
-import com.yana.internship.bean.TestBean;
+import com.yana.internship.bean.TestEntity;
 import com.yana.internship.repository.TestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Service
 public class TestService {
-    private static final Logger logger
-            = LoggerFactory.getLogger(TestService.class);
-    TestRepository testRepository;
+    private static final Logger logger = LoggerFactory.getLogger(TestService.class);
+    private final TestRepository testRepository;
 
     @Autowired
     public TestService(TestRepository testRepository) {
@@ -21,40 +21,39 @@ public class TestService {
     }
 
     @Transactional
-    public List<TestBean> getAll(){
+    public List<TestEntity> getAll() {
         logger.info("Start loading all beans");
-        List<TestBean> all = testRepository.getAll();
-        logger.info("{} number of beans has been loaded",all.size());
+        List<TestEntity> all = testRepository.getAll();
+        logger.info("{} number of beans has been loaded", all.size());
         return all;
     }
 
     @Transactional
-    public TestBean getById(int id){
-        TestBean bean = testRepository.getById(id);
+    public TestEntity getById(int id) {
+        TestEntity bean = testRepository.getById(id);
         logger.info("Got bean by id {}", bean.getId());
         return bean;
     }
 
     @Transactional
-    public TestBean deleteById(int id)
-    {
+    public TestEntity deleteById(int id) {
         logger.info("Delete bean by id {}", id);
         return testRepository.deleteById(id);
     }
 
     @Transactional
-    public TestBean create(TestBean bean){
+    public TestEntity create(TestEntity bean) {
 
-        TestBean testBean = testRepository.create(bean);
-        logger.info("Bean with id {} has been created", testBean.getId());
-        return testBean;
+        TestEntity testEntity = testRepository.create(bean);
+        logger.info("Bean with id {} has been created", testEntity.getId());
+        return testEntity;
     }
 
     @Transactional
-    public TestBean update(TestBean bean){
+    public TestEntity update(TestEntity bean) {
 
-        TestBean testBean = testRepository.update(bean);
-        logger.info("Bean with id {} has been updated", testBean.getId());
-        return testBean;
+        TestEntity testEntity = testRepository.update(bean);
+        logger.info("Bean with id {} has been updated", testEntity.getId());
+        return testEntity;
     }
 }

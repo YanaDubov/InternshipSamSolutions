@@ -1,21 +1,20 @@
 package com.yana.internship.bean;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "test")
-public class TestBean {
-    public TestBean(int id, String name) {
-    this.id = id;
-    this.name = name;
-    }
-    public TestBean() {
-    }
+public class TestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
+    @NotEmpty(message = "Enter the name, please")
+    @Size(min = 3)
     private String name;
 
 

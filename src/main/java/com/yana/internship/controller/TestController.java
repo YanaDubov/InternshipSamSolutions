@@ -1,11 +1,11 @@
 package com.yana.internship.controller;
 
-import com.yana.internship.bean.TestBean;
-import com.yana.internship.config.BusinessLogicException;
+import com.yana.internship.bean.TestEntity;
 import com.yana.internship.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,29 +19,31 @@ public class TestController {
         this.testService = testService;
     }
 
-    @GetMapping()
-    public @ResponseBody List<TestBean> getAll(){
+    @GetMapping
+    public @ResponseBody List<TestEntity> getAll(){
         return testService.getAll();
     }
 
     @GetMapping("/{id}")
-    public TestBean getBook(@PathVariable int id) {
+    public TestEntity get(@PathVariable int id) {
         return testService.getById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id){
-        testService.deleteById(id);
+    public TestEntity deleteById(@PathVariable int id){
+
+        return testService.deleteById(id);
     }
 
     @PostMapping
-    public void put(@RequestBody TestBean bean){
-        testService.create(bean);
+    public TestEntity create(@RequestBody @Valid TestEntity bean){
+        return testService.create(bean);
     }
 
     @PutMapping
-    protected void update(@RequestBody TestBean bean){
-        testService.update(bean);
+    protected TestEntity update(@RequestBody @Valid TestEntity bean){
+
+        return testService.update(bean);
     }
 
 }

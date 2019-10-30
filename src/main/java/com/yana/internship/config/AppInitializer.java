@@ -9,14 +9,14 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class < ? > [] getRootConfigClasses() {
         return new Class[] {
-                AppContext.class
+                HibernateConfig.class
         };
     }
 
     @Override
     protected Class < ? > [] getServletConfigClasses() {
         return new Class[] {
-                WebMvcConfig.class
+                WebConfig.class
         };
     }
 

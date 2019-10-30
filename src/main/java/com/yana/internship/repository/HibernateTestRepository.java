@@ -1,9 +1,8 @@
 package com.yana.internship.repository;
 
-import com.yana.internship.bean.TestBean;
+import com.yana.internship.bean.TestEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -17,46 +16,49 @@ import java.util.List;
 @Transactional
 public class HibernateTestRepository implements TestRepository {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public HibernateTestRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
-    public TestBean update(TestBean bean) {
+    public TestEntity update(TestEntity bean) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(TestBean.class.toString(), bean);
+        currentSession.saveOrUpdate(TestEntity.class.toString(), bean);
         return bean;
     }
 
     @Override
-    public TestBean create(TestBean bean) {
+    public TestEntity create(TestEntity bean) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(TestBean.class.toString(),bean);
+        currentSession.save(TestEntity.class.toString(),bean);
         return bean;
     }
 
     @Override
-    public TestBean getById(int id) {
+    public TestEntity getById(int id) {
         Session currentSession = sessionFactory.getCurrentSession();
-        TestBean bean = currentSession.get(TestBean.class, id);
+        TestEntity bean = currentSession.get(TestEntity.class, id);
         return bean;
     }
 
     @Override
-    public List<TestBean> getAll() {
+    public List<TestEntity> getAll() {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery< TestBean > cq = cb.createQuery(TestBean.class);
-        Root< TestBean > root = cq.from(TestBean.class);
+        CriteriaQuery<TestEntity> cq = cb.createQuery(TestEntity.class);
+        Root<TestEntity> root = cq.from(TestEntity.class);
         cq.select(root);
         Query query = session.createQuery(cq);
         return query.getResultList();
     }
 
     @Override
-    public TestBean deleteById(int id) {
+    public TestEntity deleteById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        TestBean testBean = session.byId(TestBean.class).load(id);
-        session.delete(testBean);
-        return testBean;
+        TestEntity testEntity = session.byId(TestEntity.class).load(id);
+        session.delete(testEntity);
+        return testEntity;
     }
 }

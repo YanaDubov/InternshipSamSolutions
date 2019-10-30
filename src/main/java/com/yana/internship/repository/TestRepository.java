@@ -1,18 +1,18 @@
 package com.yana.internship.repository;
 
-import com.yana.internship.bean.TestBean;
+import com.yana.internship.bean.TestEntity;
 
 import java.util.List;
 
 public interface TestRepository {
-    TestBean update(TestBean bean);
+    TestEntity update(TestEntity bean);
 
-    TestBean create(TestBean bean);
+    TestEntity create(TestEntity bean);
 
-    public TestBean getById(int id);
+    TestEntity getById(int id);
 
-    public List<TestBean> getAll();
+    List<TestEntity> getAll();
 
-    public TestBean deleteById(int id);
+    TestEntity deleteById(int id);
 
 }
