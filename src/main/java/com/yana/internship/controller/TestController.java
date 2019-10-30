@@ -25,7 +25,7 @@ public class TestController {
     }
 
     @GetMapping("/{id}")
-    public TestEntity get(@PathVariable int id) {
+    public TestEntity getById(@PathVariable int id) {
         return testService.getById(id);
     }
 

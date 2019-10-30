@@ -25,6 +25,12 @@ public class TestService {
         logger.info("Start loading all beans");
         List<TestEntity> all = testRepository.getAll();
         logger.info("{} number of beans has been loaded", all.size());
+
+        //logic to test
+        TestEntity testEntity = new TestEntity();
+        testEntity.setName("Yana");
+        all.add(testEntity);
+
         return all;
     }
 
