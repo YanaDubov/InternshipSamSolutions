@@ -1,6 +1,6 @@
 package com.yana.internship.service;
 
-import com.yana.internship.bean.TestEntity;
+import com.yana.internship.entity.TestEntity;
 import com.yana.internship.repository.TestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +37,13 @@ public class TestService {
     @Transactional
     public TestEntity getById(int id) {
         TestEntity bean = testRepository.getById(id);
-        logger.info("Got bean by id {}", bean.getId());
+        logger.info("Got entity by id {}", bean.getId());
         return bean;
     }
 
     @Transactional
     public int deleteById(int id) {
-        logger.info("Delete bean by id {}", id);
+        logger.info("Delete entity by id {}", id);
         return testRepository.deleteById(id);
     }
 
