@@ -1,4 +1,4 @@
-package com.yana.internship.bean;
+package com.yana.internship.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
