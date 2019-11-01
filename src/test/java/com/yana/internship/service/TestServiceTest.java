@@ -1,6 +1,6 @@
 package com.yana.internship.service;
 
-import com.yana.internship.bean.TestEntity;
+import com.yana.internship.entity.TestEntity;
 import com.yana.internship.repository.TestRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,10 +51,10 @@ public class TestServiceTest {
         List<TestEntity> list = new ArrayList<>();
         TestEntity testEntity = new TestEntity();
         testEntity.setName("Yana");
-        list.add(testEntity);
 
         when(testRepository.getAll()).thenReturn(list);
-        assertEquals(list,testService.getAll());
+        list.add(testEntity);
+        assertEquals(list.contains(testEntity),testService.getAll().contains(testEntity));
     }
 
     @Test
