@@ -38,7 +38,7 @@ public class HibernateTestRepositoryTest {
     @Test
     @Transactional()
     @Rollback()
-    public void updateTest()  {
+    public void updateTest() {
         TestEntity testEntity = new TestEntity();
         testEntity.setName("Nana");
         TestEntity createdTestEntity = hibernateTestRepository.create(testEntity);
@@ -62,11 +62,8 @@ public class HibernateTestRepositoryTest {
         final int testId = createdTestEntity.getId();
         TestEntity test = hibernateTestRepository.getById(testId);
         Assert.assertEquals(testEntity.getName(), test.getName());
-
-        testEntity.setName("Ann");
-        hibernateTestRepository.update(testEntity);
-        TestEntity test2 = hibernateTestRepository.getById(testId);
-        Assert.assertEquals(testEntity.getName(), test2.getName());
+        int id = hibernateTestRepository.deleteById(testId);
+        Assert.assertEquals(id, testId);
     }
 
     @Test
@@ -80,9 +77,17 @@ public class HibernateTestRepositoryTest {
         hibernateTestRepository.create(testEntity);
         hibernateTestRepository.create(testEntity2);
         List<TestEntity> list = hibernateTestRepository.getAll();
-        list.forEach(e-> System.out.println(e.getId()+ " "+e.getName()));
+        list.forEach(e -> System.out.println(e.getId() + " " + e.getName()));
         Assert.assertEquals(list.get(0).getName(), testEntity.getName());
         Assert.assertEquals(list.get(1).getName(), testEntity2.getName());
 
+    }
+
+    @Test
+    @Transactional()
+    @Rollback()
+    public void getNotExistEntity() {
+        TestEntity testEntity = hibernateTestRepository.getById(45);
+        Assert.assertNull(testEntity);
     }
 }
