@@ -1,6 +1,6 @@
 package com.yana.internship.repository;
 
-import com.yana.internship.config.H2Config;
+import com.yana.internship.config.HibernateConfig;
 import com.yana.internship.config.WebConfig;
 import com.yana.internship.entity.TestEntity;
 import org.junit.Assert;
@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @WebAppConfiguration
-@ContextConfiguration(classes = {WebConfig.class, H2Config.class})
+@ContextConfiguration(classes = {WebConfig.class, HibernateConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class HibernateTestRepositoryTest {
 
