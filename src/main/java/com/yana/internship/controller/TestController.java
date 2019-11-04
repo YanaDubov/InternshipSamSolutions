@@ -1,8 +1,9 @@
 package com.yana.internship.controller;
 
-import com.yana.internship.bean.TestEntity;
+import com.yana.internship.entity.TestEntity;
 import com.yana.internship.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,13 +37,13 @@ public class TestController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public TestEntity create(@RequestBody @Valid TestEntity bean){
         return testService.create(bean);
     }
 
     @PutMapping
     protected TestEntity update(@RequestBody @Valid TestEntity bean){
-
         return testService.update(bean);
     }
 
