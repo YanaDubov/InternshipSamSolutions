@@ -38,7 +38,7 @@
                 });
             });
 
-            $("#create").click(function (e) {
+            $("#put").click(function (e) {
                 var data = {
                     id: $("#id").val(),
                     name: $("#name").val()

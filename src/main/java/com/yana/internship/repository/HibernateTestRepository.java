@@ -1,6 +1,6 @@
 package com.yana.internship.repository;
 
-import com.yana.internship.bean.TestEntity;
+import com.yana.internship.entity.TestEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
