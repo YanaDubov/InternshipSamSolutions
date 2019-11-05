@@ -7,14 +7,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestServiceTest {
@@ -26,42 +26,72 @@ public class TestServiceTest {
     TestRepository testRepository;
 
     @Test
-    public void create() {
+    public void createShouldReturnCorrectResult() {
         TestEntity testEntity = mock(TestEntity.class);
         when(testRepository.create(testEntity)).thenReturn(testEntity);
         assertEquals(testEntity,testService.create(testEntity));
+
+    }
+    @Test
+    public void createShouldCallRepository() {
+        TestEntity testEntity = mock(TestEntity.class);
+        when(testRepository.create(testEntity)).thenReturn(testEntity);
+        testService.create(testEntity);
+        verify(testRepository).create(testEntity);
     }
 
     @Test
-    public void update() {
+    public void updateShouldReturnCorrectResult() {
         TestEntity testEntity = mock(TestEntity.class);
         when(testRepository.update(testEntity)).thenReturn(testEntity);
         assertEquals(testEntity,testService.update(testEntity));
     }
+    @Test
+    public void updateShouldCallRepository() {
+        TestEntity testEntity = mock(TestEntity.class);
+        when(testRepository.update(testEntity)).thenReturn(testEntity);
+        testService.update(testEntity);
+        verify(testRepository).update(testEntity);
+    }
 
     @Test
-    public void delete() {
+    public void deleteShouldReturnCorrectResult() {
         int i = 1;
         when(testRepository.deleteById(i)).thenReturn(i);
         assertEquals(i,testService.deleteById(i));
     }
+    @Test
+    public void deleteShouldCallRepository() {
+        int i = 1;
+        when(testRepository.deleteById(i)).thenReturn(i);
+        testService.deleteById(i);
+        verify(testRepository).deleteById(i);
+    }
 
     @Test
-    public void getAll() {
+    public void getAllShouldReturnCorrectResult() {
         List<TestEntity> list = new ArrayList<>();
-        TestEntity testEntity = new TestEntity();
-        testEntity.setName("Yana");
-
+        TestEntity testEntity = mock(TestEntity.class);
         when(testRepository.getAll()).thenReturn(list);
         list.add(testEntity);
         assertEquals(list.contains(testEntity),testService.getAll().contains(testEntity));
     }
+    @Test
+    public void getAllShouldCallRepository() {
+        List<TestEntity> list = new ArrayList<>();
+        TestEntity testEntity = mock(TestEntity.class);
+        when(testRepository.getAll()).thenReturn(list);
+        list.add(testEntity);
+        testService.getAll();
+        verify(testRepository).getAll();
+    }
 
     @Test
-    public void get() {
+    public void getShouldReturnCorrectResult() {
         int i = 1;
         TestEntity testEntity = mock(TestEntity.class);
         when(testRepository.getById(i)).thenReturn(testEntity);
-        assertEquals(testEntity,testService.getById(i));
+        testService.getById(i);
+        verify(testRepository).getById(i);
     }
 }
