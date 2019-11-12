@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS `test` (
+CREATE TABLE IF NOT EXISTS test (
 
-    `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` varchar(20)
-)
+    id_test int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(20)
+);

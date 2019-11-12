@@ -1,6 +1,7 @@
 package com.yana.internship.controller;
 
 import com.yana.internship.config.WebConfig;
+import com.yana.internship.entity.Lang;
 import com.yana.internship.entity.TestEntity;
 import com.yana.internship.service.TestService;
 import org.junit.Before;
@@ -47,9 +48,9 @@ public class TestControllerTest {
     @Test
     public void getByIdRequest() throws Exception {
         TestEntity testEntity = createEntity("Yana");
-        when(testService.getById(1)).thenReturn(testEntity);
+        when(testService.getById(1, Lang.en)).thenReturn(testEntity);
         this.mockMvc
-                .perform(get("/test/{id}", 1))
+                .perform(get("/test/{id}/en", 1))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.name").value("Yana"))
@@ -61,9 +62,9 @@ public class TestControllerTest {
         TestEntity testEntity = createEntity("Yana");
         List<TestEntity> list = new ArrayList<>();
         list.add(testEntity);
-        when(testService.getAll()).thenReturn(list);
+        when(testService.getAll(Lang.en)).thenReturn(list);
         this.mockMvc
-                .perform(get("/test"))
+                .perform(get("/test/en"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$[0].name").value("Yana"));

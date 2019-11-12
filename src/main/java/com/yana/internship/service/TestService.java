@@ -1,5 +1,6 @@
 package com.yana.internship.service;
 
+import com.yana.internship.entity.Lang;
 import com.yana.internship.entity.TestEntity;
 import com.yana.internship.repository.TestRepository;
 import org.slf4j.Logger;
@@ -21,9 +22,9 @@ public class TestService {
     }
 
     @Transactional
-    public List<TestEntity> getAll() {
+    public List<TestEntity> getAll(Lang lang) {
         logger.info("Start loading all beans");
-        List<TestEntity> all = testRepository.getAll();
+        List<TestEntity> all = testRepository.getAll(lang);
         logger.info("{} number of beans has been loaded", all.size());
 
         //logic to test
@@ -35,8 +36,8 @@ public class TestService {
     }
 
     @Transactional
-    public TestEntity getById(int id) {
-        TestEntity bean = testRepository.getById(id);
+    public TestEntity getById(int id, Lang lang) {
+        TestEntity bean = testRepository.getById(id,lang);
         logger.info("Got entity by id {}", bean.getId());
         return bean;
     }

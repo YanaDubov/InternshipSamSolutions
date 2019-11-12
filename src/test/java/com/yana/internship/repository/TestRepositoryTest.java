@@ -2,6 +2,7 @@ package com.yana.internship.repository;
 
 import com.yana.internship.config.HibernateConfig;
 import com.yana.internship.config.WebConfig;
+import com.yana.internship.entity.Lang;
 import com.yana.internship.entity.TestEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ public class TestRepositoryTest {
     @Test
     public void createAndGetByIdEntity() {
         TestEntity createdTestEntity = hibernateTestRepository.create(createTestEntity("Nana"));
-        TestEntity actualEntity = hibernateTestRepository.getById(createdTestEntity.getId());
+        TestEntity actualEntity = hibernateTestRepository.getById(createdTestEntity.getId(), Lang.en);
         assertEquals(createdTestEntity, actualEntity);
     }
 
@@ -46,18 +47,12 @@ public class TestRepositoryTest {
         int id = hibernateTestRepository.deleteById(createdTestEntity.getId());
         assertEquals(createdTestEntity.getId(), id);
     }
-    @Test
-    public void getByIdShouldReturnNullAfterDelete() {
-        TestEntity createdTestEntity = hibernateTestRepository.create(createTestEntity("Nana"));
-        TestEntity actualEntity = hibernateTestRepository.getById(hibernateTestRepository.deleteById(createdTestEntity.getId()));
-        assertNull(actualEntity);
-    }
 
     @Test
     public void createEntitiesAndGetAll() {
         TestEntity actualEntity1 = hibernateTestRepository.create(createTestEntity("Nana"));
         TestEntity actualEntity2 = hibernateTestRepository.create(createTestEntity("Ann"));
-        List<TestEntity> list = hibernateTestRepository.getAll();
+        List<TestEntity> list = hibernateTestRepository.getAll(Lang.en);
         assertEquals(list.get(0), actualEntity1);
         assertEquals(list.get(1), actualEntity2);
 

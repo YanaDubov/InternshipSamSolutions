@@ -1,5 +1,6 @@
 package com.yana.internship.controller;
 
+import com.yana.internship.entity.Lang;
 import com.yana.internship.entity.TestEntity;
 import com.yana.internship.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ public class TestController {
         this.testService = testService;
     }
 
-    @GetMapping
-    public @ResponseBody List<TestEntity> getAll(){
-        return testService.getAll();
+    @GetMapping("/{lang}")
+    public @ResponseBody List<TestEntity> getAll(@PathVariable Lang lang){
+        return testService.getAll(lang);
     }
 
-    @GetMapping("/{id}")
-    public TestEntity getById(@PathVariable int id) {
-        return testService.getById(id);
+    @GetMapping("/{id}/{lang}")
+    public TestEntity getById(@PathVariable int id, @PathVariable Lang lang) {
+        return testService.getById(id, lang);
     }
 
     @DeleteMapping("/{id}")
