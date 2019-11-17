@@ -63,3 +63,9 @@ CREATE TABLE apartment_image(
     CONSTRAINT fk_apartments FOREIGN KEY (apartment_id) REFERENCES apartment(id),
     CONSTRAINT fk_image FOREIGN KEY (image_id) REFERENCES image(id)
 );
+CREATE TABLE IF NOT EXISTS file (
+
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    url varchar(128) NOT NULL,
+    file blob NOT NULL
+);
