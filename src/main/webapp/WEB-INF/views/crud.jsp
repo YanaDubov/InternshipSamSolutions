@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}" />
+<fmt:setBundle basename="messages" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Test</title>
     <link rel="stylesheet" type="text/css" href="crudStyle.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,7 +18,12 @@
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+        function changeLang(lang){
+            window.location.href = "?lang=" + lang;
+            console.log(url);
+        }
         $(document).ready(function () {
+
             $("#post").click(function (e) {
                 var data = {
                     id: $("#id").val(),
@@ -71,7 +78,6 @@
                 })
 
             })
-
             $("#get").click(function (e) {
 
                 var value = $("#idtoget").val();
@@ -110,8 +116,13 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-5">
-            <h1>CRUD test app</h1>
+        <div class="col-md-6">
+                <select onchange=changeLang(this.value)>
+                    <option value="#"><fmt:message key="label.chooseRequestLocale" /></option>
+                    <option value="en"><fmt:message key="label.lang.en" /></option>
+                    <option value="ru"><fmt:message key="label.lang.ru" /></option>
+                </select>
+            <h1> <fmt:message key="crud.title"/></h1>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -122,9 +133,9 @@
                 <div class="col-md-6">
                     <br>
                     <div class="btn-group" role="group" style="margin-top: 5px;">
-                        <button id="get" type="button" class="btn btn-primary">Get</button>
-                        <button id="showAll" type="button" class="btn btn-primary">Get All</button>
-                        <button id="delete" type="button" class="btn btn-primary">Delete</button>
+                        <button id="get" type="button" class="btn btn-primary"><fmt:message key="crud.get"/></button>
+                        <button id="showAll" type="button" class="btn btn-primary"><fmt:message key="crud.getall"/></button>
+                        <button id="delete" type="button" class="btn btn-primary"><fmt:message key="crud.delete"/></button>
                     </div>
                 </div>
             </div>
@@ -136,14 +147,14 @@
                     <input type="text" class="form-control" id="id">
                 </div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name"><fmt:message key="crud.name"/></label>
                     <input type="test" class="form-control" id="name">
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="btn-group " role="group" style="margin-top: 98px;">
-                    <button id="post" type="button" class="btn btn-primary">Add</button>
-                    <button id="put" type="button" class="btn btn-primary">Update</button>
+                    <button id="post" type="button" class="btn btn-primary"><fmt:message key="crud.add" /></button>
+                    <button id="put" type="button" class="btn btn-primary"><fmt:message key="crud.update" /></button>
                 </div>
             </div>
 
@@ -157,7 +168,7 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name</th>
+                <th scope="col"><fmt:message key="crud.name"/></th>
             </tr>
             </thead>
             <tbody>
