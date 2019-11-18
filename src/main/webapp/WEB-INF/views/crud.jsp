@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Test</title>
-    <link rel="stylesheet" type="text/css" href="crudStyle.css">
+<%--    <link rel="stylesheet" type="text/css" href="crudStyle.css">--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -20,15 +20,26 @@
     <script type="text/javascript">
         function changeLang(lang){
             window.location.href = "?lang=" + lang;
-            console.log(url);
+            console.log(window.location.href)
         }
         $(document).ready(function () {
 
             $("#post").click(function (e) {
+                var lang = [];
+                lang[0] ={
+                    lang:"ru",
+                    localName:$("#nameRu").val()
+                };
+                lang[1] = {
+                    lang:"en",
+                    localName:$("#name").val()
+                };
                 var data = {
                     id: $("#id").val(),
-                    name: $("#name").val()
+                    name: $("#name").val(),
+                    locals:lang
                 };
+
                 var payload = JSON.stringify(data);
                 console.log(payload);
 
@@ -46,9 +57,19 @@
             });
 
             $("#put").click(function (e) {
+                var lang = [];
+                lang[0] ={
+                    lang:"ru",
+                    localName:$("#nameRu").val()
+                };
+                lang[1] = {
+                    lang:"en",
+                    localName:$("#name").val()
+                };
                 var data = {
                     id: $("#id").val(),
-                    name: $("#name").val()
+                    name: $("#name").val(),
+                    locals:lang
                 };
                 var payload = JSON.stringify(data);
                 console.log(payload);
@@ -79,10 +100,15 @@
 
             })
             $("#get").click(function (e) {
-
+                var userLang = window.location.href.match(/lang=([^&]+)/);
+                console.log(userLang);
+                var lang = "en"
+                if(userLang){
+                    lang = userLang[1]
+                }
                 var value = $("#idtoget").val();
                 $.ajax({
-                    url: "test/" + value,
+                    url: "test/" + value + "/" + lang,
                     dataType: "json",
                     type: "GET",
                     success: function (data) {
@@ -94,9 +120,14 @@
                 })
             })
             $("#showAll").click(function () {
-
+                var userLang = window.location.href.match(/lang=([^&]+)/);
+                console.log(userLang);
+                var lang = "en"
+                if(userLang){
+                    lang = userLang[1]
+                }
                 $.ajax({
-                    url: "test",
+                    url: "test/"+ lang,
                     dataType: "json",
                     type: "GET",
                     success: function (data) {
@@ -148,7 +179,11 @@
                 </div>
                 <div class="form-group">
                     <label for="name"><fmt:message key="crud.name"/></label>
-                    <input type="test" class="form-control" id="name">
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="name"><fmt:message key="crud.nameRu"/></label>
+                    <input type="text" class="form-control" id="nameRu">
                 </div>
             </div>
             <div class="col-md-7">

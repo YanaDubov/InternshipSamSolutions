@@ -1,29 +1,19 @@
 package com.yana.internship.entity;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-
 @Entity
-@Table(name = "test")
-public class TestEntity {
-
+@Table(name = "role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(nullable = false)
-    @NotEmpty(message = "Enter the name, please")
-    @Size(min = 3)
+    private Long id;
     private String name;
 
-
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

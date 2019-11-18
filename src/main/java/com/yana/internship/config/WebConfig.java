@@ -15,12 +15,6 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource("classpath:flyway.properties")
 @ComponentScan(basePackages = "com.yana.internship") // TODO: 2019-10-29 move to another config class
 public class WebConfig implements WebMvcConfigurer {
-    private final Environment environment;
-
-    public WebConfig(Environment environment) {
-        this.environment = environment;
-    }
-
     @Bean
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -29,5 +23,4 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
 }
