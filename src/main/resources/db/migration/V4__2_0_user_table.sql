@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS apartment (
     CONSTRAINT  fk_address FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT fk_tariff FOREIGN KEY (tariff_id) REFERENCES tariff(id)
 );
-CREATE TABLE IF NOT EXISTS app_order (
+CREATE TABLE IF NOT EXISTS apartment_order (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     apartment_id int NOT NULL,
