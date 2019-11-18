@@ -27,28 +27,28 @@ import static org.junit.Assert.*;
 
         @Test
         public void createAndCheckIfExist() {
-            Role createdRole = roleRepository.save(createTestEntity(1));
+            Role createdRole = roleRepository.save(createTestEntity(1L));
             assertTrue(roleRepository.existsById(createdRole.getId()));
         }
 
         @Test
         public void createAndGetByIdEntity() {
-            Role createdRole = roleRepository.save(createTestEntity(1));
+            Role createdRole = roleRepository.save(createTestEntity(1L));
             Role actualRole = roleRepository.findById(createdRole.getId()).get();
             assertEquals(createdRole, actualRole);
         }
 
         @Test
         public void deleteByIdNotExist() {
-            Role createdRole = roleRepository.save(createTestEntity(1));
+            Role createdRole = roleRepository.save(createTestEntity(1L));
             roleRepository.deleteById(createdRole.getId());
             assertFalse(roleRepository.existsById(createdRole.getId()));
         }
 
         @Test
         public void createEntitiesAndGetAll() {
-            Role createdRole1 = roleRepository.save(createTestEntity(1));
-            Role createdRole2 = roleRepository.save(createTestEntity(2));
+            Role createdRole1 = roleRepository.save(createTestEntity(1L));
+            Role createdRole2 = roleRepository.save(createTestEntity(2L));
             List<Role> list = new ArrayList<>();
             roleRepository.findAll().forEach(list::add);
             assertEquals(list.get(0), createdRole1);
@@ -56,7 +56,7 @@ import static org.junit.Assert.*;
 
         }
 
-        private Role createTestEntity(Integer id) {
+        private Role createTestEntity(Long id) {
             Role role = new Role();
             role.setId(id);
             role.setName("Test");

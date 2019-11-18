@@ -26,27 +26,27 @@ import static org.junit.Assert.*;
 
         @Test
         public void createAndCheckIfExist() {
-            File createdFile = fileRepository.save(createTestEntity(1));
+            File createdFile = fileRepository.save(createTestEntity(1L));
             assertTrue(fileRepository.existsById(createdFile.getId()));
         }
         @Test
         public void createAndGetByIdEntity() {
-            File createdFile = fileRepository.save(createTestEntity(1));
+            File createdFile = fileRepository.save(createTestEntity(1L));
             File actualFile = fileRepository.findById(createdFile.getId()).get();
             assertEquals(createdFile, actualFile);
         }
 
         @Test
         public void deleteByIdNotExist() {
-            File createdFile = fileRepository.save(createTestEntity(1));
+            File createdFile = fileRepository.save(createTestEntity(1L));
             fileRepository.deleteById(createdFile.getId());
             assertFalse(fileRepository.existsById(createdFile.getId()));
         }
 
         @Test
         public void createEntitiesAndGetAll() {
-            File createdFile1 = fileRepository.save(createTestEntity(1));
-            File createdFile2 = fileRepository.save(createTestEntity(2));
+            File createdFile1 = fileRepository.save(createTestEntity(1L));
+            File createdFile2 = fileRepository.save(createTestEntity(2L));
             List<File> list = new ArrayList<>();
             fileRepository.findAll().forEach(list::add);
             assertEquals(list.get(0), createdFile1);
@@ -54,7 +54,7 @@ import static org.junit.Assert.*;
 
         }
 
-        private File createTestEntity(Integer id) {
+        private File createTestEntity(Long id) {
             File file = new File();
             file.setId(id);
             file.setUrl("Test");

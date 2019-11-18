@@ -25,27 +25,27 @@ public class TariffRepositoryTest {
 
     @Test
     public void createAndCheckIfExist() {
-        Tariff createdTariff = tariffRepository.save(createTestEntity(1));
+        Tariff createdTariff = tariffRepository.save(createTestEntity(1L));
         assertTrue(tariffRepository.existsById(createdTariff.getId()));
     }
     @Test
     public void createAndGetByIdEntity() {
-        Tariff createdTariff = tariffRepository.save(createTestEntity(1));
+        Tariff createdTariff = tariffRepository.save(createTestEntity(1L));
         Tariff actualTariff = tariffRepository.findById(createdTariff.getId()).get();
         assertEquals(createdTariff, actualTariff);
     }
 
     @Test
     public void deleteByIdNotExist() {
-        Tariff createdTariff = tariffRepository.save(createTestEntity(1));
+        Tariff createdTariff = tariffRepository.save(createTestEntity(1L));
         tariffRepository.deleteById(createdTariff.getId());
         assertFalse(tariffRepository.existsById(createdTariff.getId()));
     }
 
     @Test
     public void createEntitiesAndGetAll() {
-        Tariff createdTariff1 = tariffRepository.save(createTestEntity(1));
-        Tariff createdTariff2 = tariffRepository.save(createTestEntity(2));
+        Tariff createdTariff1 = tariffRepository.save(createTestEntity(1L));
+        Tariff createdTariff2 = tariffRepository.save(createTestEntity(2L));
         List<Tariff> list = new ArrayList<>();
         tariffRepository.findAll().forEach(list::add);
         assertEquals(list.get(0), createdTariff1);
@@ -53,7 +53,7 @@ public class TariffRepositoryTest {
 
     }
 
-    private Tariff createTestEntity(Integer id) {
+    private Tariff createTestEntity(Long id) {
         Tariff tariff = new Tariff();
         tariff.setId(id);
         tariff.setCostPerNight(1);

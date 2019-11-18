@@ -26,27 +26,27 @@ import static org.junit.Assert.*;
 
         @Test
         public void createAndCheckIfExist() {
-            User createdUser = userRepository.save(createTestEntity(1));
+            User createdUser = userRepository.save(createTestEntity(1L));
             assertTrue(userRepository.existsById(createdUser.getId()));
         }
         @Test
         public void createAndGetByIdEntity() {
-            User createdUser = userRepository.save(createTestEntity(1));
+            User createdUser = userRepository.save(createTestEntity(1L));
             User actualUser = userRepository.findById(createdUser.getId()).get();
             assertEquals(createdUser, actualUser);
         }
 
         @Test
         public void deleteByIdNotExist() {
-            User createdUser = userRepository.save(createTestEntity(1));
+            User createdUser = userRepository.save(createTestEntity(1L));
             userRepository.deleteById(createdUser.getId());
             assertFalse(userRepository.existsById(createdUser.getId()));
         }
 
         @Test
         public void createEntitiesAndGetAll() {
-            User createdUser1 = userRepository.save(createTestEntity(1));
-            User createdUser2 = userRepository.save(createTestEntity(2));
+            User createdUser1 = userRepository.save(createTestEntity(1L));
+            User createdUser2 = userRepository.save(createTestEntity(2L));
             List<User> list = new ArrayList<>();
             userRepository.findAll().forEach(list::add);
             assertEquals(list.get(0), createdUser1);
@@ -54,7 +54,7 @@ import static org.junit.Assert.*;
 
         }
 
-        private User createTestEntity(Integer id) {
+        private User createTestEntity(Long id) {
             User user = new User();
             user.setId(id);
             user.setName("Test");

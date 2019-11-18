@@ -34,28 +34,28 @@ public class OrderRepositoryTest {
 
     @Test
     public void createAndGetByIdEntity() {
-        Order createdOrder = orderRepository.save(createTestEntity(1));
+        Order createdOrder = orderRepository.save(createTestEntity(1L));
         Order actualOrder = orderRepository.findById(createdOrder.getId()).get();
         assertEquals(createdOrder, actualOrder);
     }
 
     @Test
     public void createAndCheckIfExist() {
-        Order createdOrder = orderRepository.save(createTestEntity(1));
+        Order createdOrder = orderRepository.save(createTestEntity(1L));
         assertTrue(orderRepository.existsById(createdOrder.getId()));
     }
 
     @Test
     public void deleteByIdNotExist() {
-        Order createdOrder = orderRepository.save(createTestEntity(1));
+        Order createdOrder = orderRepository.save(createTestEntity(1L));
         orderRepository.deleteById(createdOrder.getId());
         assertFalse(orderRepository.existsById(createdOrder.getId()));
     }
 
     @Test
     public void createEntitiesAndGetAll() {
-        Order createdOrder1 = orderRepository.save(createTestEntity(1));
-        Order createdOrder2 = orderRepository.save(createTestEntity(2));
+        Order createdOrder1 = orderRepository.save(createTestEntity(1L));
+        Order createdOrder2 = orderRepository.save(createTestEntity(2L));
         List<Order> list = new ArrayList<>();
         orderRepository.findAll().forEach(list::add);
         assertEquals(list.get(0), createdOrder1);
@@ -63,7 +63,7 @@ public class OrderRepositoryTest {
 
     }
 
-    private Order createTestEntity(Integer id) {
+    private Order createTestEntity(Long id) {
         Order order = new Order();
         order.setId(id);
         order.setCreationDate(new Date());

@@ -26,27 +26,27 @@ import static org.junit.Assert.*;
 
         @Test
         public void createAndCheckIfExist() {
-            Image createdImage = imageRepository.save(createTestEntity(1));
+            Image createdImage = imageRepository.save(createTestEntity(1L));
             assertTrue(imageRepository.existsById(createdImage.getId()));
         }
         @Test
         public void createAndGetByIdEntity() {
-            Image createdImage = imageRepository.save(createTestEntity(1));
+            Image createdImage = imageRepository.save(createTestEntity(1L));
             Image actualImage = imageRepository.findById(createdImage.getId()).get();
             assertEquals(createdImage, actualImage);
         }
 
         @Test
         public void deleteByIdNotExist() {
-            Image createdImage = imageRepository.save(createTestEntity(1));
+            Image createdImage = imageRepository.save(createTestEntity(1L));
             imageRepository.deleteById(createdImage.getId());
             assertFalse(imageRepository.existsById(createdImage.getId()));
         }
 
         @Test
         public void createEntitiesAndGetAll() {
-            Image createdImage1 = imageRepository.save(createTestEntity(1));
-            Image createdImage2 = imageRepository.save(createTestEntity(2));
+            Image createdImage1 = imageRepository.save(createTestEntity(1L));
+            Image createdImage2 = imageRepository.save(createTestEntity(2L));
             List<Image> list = new ArrayList<>();
             imageRepository.findAll().forEach(list::add);
             assertEquals(list.get(0), createdImage1);
@@ -54,7 +54,7 @@ import static org.junit.Assert.*;
 
         }
 
-        private Image createTestEntity(Integer id) {
+        private Image createTestEntity(Long id) {
             Image image = new Image();
             image.setId(id);
             image.setUrl("Test");

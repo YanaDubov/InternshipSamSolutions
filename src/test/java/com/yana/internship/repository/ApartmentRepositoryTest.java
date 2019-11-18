@@ -33,34 +33,34 @@ public class ApartmentRepositoryTest {
 
     @Test
     public void createAndGetById() {
-        Apartment createdApartment = apartmentRepository.save(createApartment(1));
+        Apartment createdApartment = apartmentRepository.save(createApartment(1L));
         Apartment actualApartment = apartmentRepository.findById(createdApartment.getId()).get();
         assertEquals(actualApartment, createdApartment);
     }
     @Test
     public void createAndCheckIfExist() {
-        Apartment createdApartment = apartmentRepository.save(createApartment(1));
+        Apartment createdApartment = apartmentRepository.save(createApartment(1L));
         assertTrue(apartmentRepository.existsById(createdApartment.getId()));
     }
 
     @Test
     public void deleteByIdEntityNotExist() {
-        Apartment createdApartment = apartmentRepository.save(createApartment(1));
+        Apartment createdApartment = apartmentRepository.save(createApartment(1L));
         apartmentRepository.deleteById(createdApartment.getId());
         assertFalse(apartmentRepository.existsById(createdApartment.getId()));
     }
 
     @Test
     public void createApartmentsAndGetAll() {
-        Apartment createdApartment1 = apartmentRepository.save(createApartment(1));
-        Apartment createdApartment2 = apartmentRepository.save(createApartment(1));
+        Apartment createdApartment1 = apartmentRepository.save(createApartment(1L));
+        Apartment createdApartment2 = apartmentRepository.save(createApartment(1L));
         List<Apartment> list = new ArrayList<>();
         apartmentRepository.findAll().forEach(list::add);
         assertEquals(list.get(0), createdApartment1);
         assertEquals(list.get(1), createdApartment2);
     }
 
-    private Apartment createApartment(Integer id) {
+    private Apartment createApartment(Long id) {
         Apartment apartment = new Apartment();
         apartment.setId(id);
         apartment.setName("Test");

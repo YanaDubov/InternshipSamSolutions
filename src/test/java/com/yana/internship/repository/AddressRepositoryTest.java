@@ -27,27 +27,27 @@ public class AddressRepositoryTest {
 
     @Test
     public void createAndCheckIfExist() {
-        Address createdAddress = addressRepository.save(createTestEntity(1));
+        Address createdAddress = addressRepository.save(createTestEntity(1L));
         assertTrue(addressRepository.existsById(createdAddress.getId()));
     }
     @Test
     public void createAndGetByIdEntity() {
-        Address createdAddress = addressRepository.save(createTestEntity(1));
+        Address createdAddress = addressRepository.save(createTestEntity(1L));
         Address actualAddress = addressRepository.findById(createdAddress.getId()).get();
         assertEquals(createdAddress, actualAddress);
     }
 
     @Test
     public void deleteByIdNotExist() {
-        Address createdAddress = addressRepository.save(createTestEntity(1));
+        Address createdAddress = addressRepository.save(createTestEntity(1L));
         addressRepository.deleteById(createdAddress.getId());
         assertFalse(addressRepository.existsById(createdAddress.getId()));
     }
 
     @Test
     public void createEntitiesAndGetAll() {
-        Address createdAddress1 = addressRepository.save(createTestEntity(1));
-        Address createdAddress2 = addressRepository.save(createTestEntity(2));
+        Address createdAddress1 = addressRepository.save(createTestEntity(1L));
+        Address createdAddress2 = addressRepository.save(createTestEntity(2L));
         List<Address> list = new ArrayList<>();
         addressRepository.findAll().forEach(list::add);
         assertEquals(list.get(0), createdAddress1);
@@ -55,7 +55,7 @@ public class AddressRepositoryTest {
 
     }
 
-    private Address createTestEntity(Integer id) {
+    private Address createTestEntity(Long id) {
         Address address = new Address();
         address.setId(id);
         address.setCountry("Test");
