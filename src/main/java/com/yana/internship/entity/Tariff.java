@@ -1,6 +1,7 @@
 package com.yana.internship.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tariff")
@@ -10,7 +11,7 @@ public class Tariff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "cost_per_night")
-    private Integer costPerNight;
+    private BigDecimal costPerNight;
     public Long getId() {
         return id;
     }
@@ -19,11 +20,11 @@ public class Tariff {
         this.id = id;
     }
 
-    public Integer getCostPerNight() {
+    public BigDecimal getCostPerNight() {
         return costPerNight;
     }
 
-    public void setCostPerNight(int costPerNight) {
+    public void setCostPerNight(BigDecimal costPerNight) {
         this.costPerNight = costPerNight;
     }
 

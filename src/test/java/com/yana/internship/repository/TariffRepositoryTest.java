@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class TariffRepositoryTest {
     private Tariff createTestEntity(Long id) {
         Tariff tariff = new Tariff();
         tariff.setId(id);
-        tariff.setCostPerNight(1);
+        tariff.setCostPerNight(BigDecimal.valueOf(1));
         return tariff;
     }
 }

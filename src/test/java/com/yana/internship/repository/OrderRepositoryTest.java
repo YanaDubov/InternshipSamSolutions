@@ -11,11 +11,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebConfig.class, JpaConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,9 +77,9 @@ public class OrderRepositoryTest {
         apartment.setName("Test");
         apartment.setDescription("Test");
 
-        Address address =  new Address();
+        Address address = new Address();
         address.setId(id);
-        address.setCountry("Test");
+        address.setCountry(Country.BY);
         address.setCity("Test");
         address.setAddress("Test");
         apartment.setAddress(address);
@@ -85,7 +87,7 @@ public class OrderRepositoryTest {
 
         Tariff tariff = new Tariff();
         tariff.setId(id);
-        tariff.setCostPerNight(1);
+        tariff.setCostPerNight(BigDecimal.valueOf(1));
         apartment.setTariff(tariff);
         order.setApartment(apartment);
         tariffRepository.save(tariff);

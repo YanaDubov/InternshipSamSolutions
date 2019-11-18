@@ -21,7 +21,7 @@ CREATE TABLE user_role(
 CREATE TABLE IF NOT EXISTS tariff (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cost_per_night int
+    cost_per_night DECIMAL
 );
 CREATE TABLE IF NOT EXISTS image (
 

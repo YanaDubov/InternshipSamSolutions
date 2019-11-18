@@ -3,6 +3,7 @@ package com.yana.internship.repository;
 import com.yana.internship.config.JpaConfig;
 import com.yana.internship.config.WebConfig;
 import com.yana.internship.entity.Address;
+import com.yana.internship.entity.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class AddressRepositoryTest {
         Address createdAddress = addressRepository.save(createTestEntity(1L));
         assertTrue(addressRepository.existsById(createdAddress.getId()));
     }
+
     @Test
     public void createAndGetByIdEntity() {
         Address createdAddress = addressRepository.save(createTestEntity(1L));
@@ -58,7 +60,7 @@ public class AddressRepositoryTest {
     private Address createTestEntity(Long id) {
         Address address = new Address();
         address.setId(id);
-        address.setCountry("Test");
+        address.setCountry(Country.BY);
         address.setCity("Test");
         address.setAddress("Test");
         return address;

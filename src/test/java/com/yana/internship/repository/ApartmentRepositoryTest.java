@@ -4,6 +4,7 @@ import com.yana.internship.config.JpaConfig;
 import com.yana.internship.config.WebConfig;
 import com.yana.internship.entity.Address;
 import com.yana.internship.entity.Apartment;
+import com.yana.internship.entity.Country;
 import com.yana.internship.entity.Tariff;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class ApartmentRepositoryTest {
         Apartment actualApartment = apartmentRepository.findById(createdApartment.getId()).get();
         assertEquals(actualApartment, createdApartment);
     }
+
     @Test
     public void createAndCheckIfExist() {
         Apartment createdApartment = apartmentRepository.save(createApartment(1L));
@@ -66,9 +69,9 @@ public class ApartmentRepositoryTest {
         apartment.setName("Test");
         apartment.setDescription("Test");
 
-        Address address =  new Address();
+        Address address = new Address();
         address.setId(id);
-        address.setCountry("Test");
+        address.setCountry(Country.BY);
         address.setCity("Test");
         address.setAddress("Test");
         apartment.setAddress(address);
@@ -76,7 +79,7 @@ public class ApartmentRepositoryTest {
 
         Tariff tariff = new Tariff();
         tariff.setId(id);
-        tariff.setCostPerNight(1);
+        tariff.setCostPerNight(BigDecimal.valueOf(1));
         apartment.setTariff(tariff);
         tariffRepository.save(tariff);
 

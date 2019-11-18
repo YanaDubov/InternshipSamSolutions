@@ -8,7 +8,8 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String country;// TODO: 2019-11-13 to enum
+    @Enumerated(EnumType.STRING)
+    private Country country;
     private String city;
     private String address;
 
@@ -20,11 +21,11 @@ public class Address {
         this.id = id;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
