@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS apartment (
 CREATE TABLE IF NOT EXISTS app_order (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name varchar(20),
     apartment_id int NOT NULL,
     customer_id int NOT NULL,
     creation_date timestamp NOT NULL,
