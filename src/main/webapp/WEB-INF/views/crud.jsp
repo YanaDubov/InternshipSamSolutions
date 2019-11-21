@@ -25,19 +25,9 @@
         $(document).ready(function () {
 
             $("#post").click(function (e) {
-                var lang = [];
-                lang[0] ={
-                    lang:"ru",
-                    localName:$("#nameRu").val()
-                };
-                lang[1] = {
-                    lang:"en",
-                    localName:$("#name").val()
-                };
                 var data = {
                     id: $("#id").val(),
-                    name: $("#name").val(),
-                    locals:lang
+                    name: $("#name").val()
                 };
 
                 var payload = JSON.stringify(data);
@@ -57,19 +47,10 @@
             });
 
             $("#put").click(function (e) {
-                var lang = [];
-                lang[0] ={
-                    lang:"ru",
-                    localName:$("#nameRu").val()
-                };
-                lang[1] = {
-                    lang:"en",
-                    localName:$("#name").val()
-                };
+
                 var data = {
                     id: $("#id").val(),
-                    name: $("#name").val(),
-                    locals:lang
+                    name: $("#name").val()
                 };
                 var payload = JSON.stringify(data);
                 console.log(payload);
@@ -100,15 +81,10 @@
 
             })
             $("#get").click(function (e) {
-                var userLang = window.location.href.match(/lang=([^&]+)/);
-                console.log(userLang);
-                var lang = "en"
-                if(userLang){
-                    lang = userLang[1]
-                }
+
                 var value = $("#idtoget").val();
                 $.ajax({
-                    url: "test/" + value + "/" + lang,
+                    url: "test/" + value,
                     dataType: "json",
                     type: "GET",
                     success: function (data) {
@@ -120,14 +96,9 @@
                 })
             })
             $("#showAll").click(function () {
-                var userLang = window.location.href.match(/lang=([^&]+)/);
-                console.log(userLang);
-                var lang = "en"
-                if(userLang){
-                    lang = userLang[1]
-                }
+
                 $.ajax({
-                    url: "test/"+ lang,
+                    url: "test",
                     dataType: "json",
                     type: "GET",
                     success: function (data) {
@@ -180,10 +151,6 @@
                 <div class="form-group">
                     <label for="name"><fmt:message key="crud.name"/></label>
                     <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group">
-                    <label for="name"><fmt:message key="crud.nameRu"/></label>
-                    <input type="text" class="form-control" id="nameRu">
                 </div>
             </div>
             <div class="col-md-7">
