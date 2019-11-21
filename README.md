@@ -11,5 +11,5 @@ Travel Apartments is a platform for travelers to stay in comfortable place durin
   + open ` /src/main/resources/database.properties ` file
   + change ` jdbc.username ` , ` jdbc.password ` and ` jdbc.url ` as in your mysql installation
 4. Run `mvn clean install`
-5. Deploy` yana-internship-app:war `
-6. Open ` http://localhost:8080/yana_internship_app_war/ `
+5. Deploy ` target/yana-internship-app:war ` to Tomcat 8
+6. Open ` http://localhost:8080/yana-internship-app/ `
