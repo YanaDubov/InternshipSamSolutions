@@ -1,4 +1,7 @@
 # InternshipSamSolutions
+## Travel Apartments
+Travel Apartments is a platform for travelers to stay in comfortable place during their vactions. It provides us with a large number of homelike apartments in 10 different countries. Using platform travelers can find, view photos and descriptions, book their future travel apartments.
+
 ## Steps to setup app
 1. Clone the application or download zip:
   `git clone https://github.com/YanaDubov/InternshipSamSolutions.git `
