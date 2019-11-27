@@ -2,10 +2,7 @@ package com.yana.internship.repository;
 
 import com.yana.internship.config.JpaConfig;
 import com.yana.internship.config.WebConfig;
-import com.yana.internship.entity.Address;
-import com.yana.internship.entity.Apartment;
-import com.yana.internship.entity.Country;
-import com.yana.internship.entity.Tariff;
+import com.yana.internship.entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.transaction.Transactional;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -58,9 +58,9 @@ public class ApartmentRepositoryTest {
     }
 
     @Test
-    public void createApartmentsAndGetAll() {
+    public void createApartmentsAndGetAll() throws ParseException {
         Apartment createdApartment1 = apartmentRepository.save(createApartment(1L));
-        Apartment createdApartment2 = apartmentRepository.save(createApartment(1L));
+        Apartment createdApartment2 = apartmentRepository.save(createApartment(2L));
         List<Apartment> list = new ArrayList<>();
         apartmentRepository.findAll().forEach(list::add);
         assertEquals(list.get(0), createdApartment1);
@@ -86,7 +86,6 @@ public class ApartmentRepositoryTest {
         tariff.setCostPerNight(BigDecimal.valueOf(1));
         apartment.setTariff(tariff);
         tariffRepository.save(tariff);
-
         return apartment;
     }
 }
