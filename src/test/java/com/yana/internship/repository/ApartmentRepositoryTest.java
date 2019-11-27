@@ -32,6 +32,10 @@ public class ApartmentRepositoryTest {
     TariffRepository tariffRepository;
     @Autowired
     AddressRepository addressRepository;
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void createAndGetById() {

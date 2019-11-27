@@ -24,7 +24,7 @@ public class Apartment {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "apartment_image",
             joinColumns = @JoinColumn(name = "apartment_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id")
