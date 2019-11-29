@@ -1,12 +1,12 @@
 package com.yana.internship.controller;
 
-import com.yana.internship.entity.File;
 import com.yana.internship.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("file")
@@ -20,13 +20,15 @@ public class FileController {
     }
 
     @GetMapping("/{url}")
-    public File downloadFileByUrl(@PathVariable String url) {
-        return fileService.downloadByUrl(url);
+    public ResponseEntity<byte[]> downloadFileByUrl(@PathVariable String url) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(fileService.downloadByUrl(url), headers, HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public File uploadFile(@RequestBody @Valid File file) {
+    public String uploadFile(@RequestBody byte[] file) {
         return fileService.uploadFile(file);
     }
 

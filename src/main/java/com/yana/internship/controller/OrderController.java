@@ -6,8 +6,6 @@ import com.yana.internship.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("order")
 public class OrderController {
@@ -19,8 +17,7 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Order create(@RequestBody @Valid OrderDTO orderDTO) {
-
+    public Order create(@RequestBody OrderDTO orderDTO) {
         return orderService.create(orderDTO);
     }
 
@@ -28,6 +25,4 @@ public class OrderController {
     public void delete(@PathVariable Long id) {
         orderService.delete(id);
     }
-
-
 }

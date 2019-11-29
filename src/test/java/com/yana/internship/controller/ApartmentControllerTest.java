@@ -43,7 +43,7 @@ public class ApartmentControllerTest {
     }
 
     @Test
-    public void getByIdRequest() throws Exception {
+    public void getByIdRequestShouldReturnCorrectResult() throws Exception {
         Apartment apartment = createApartment(1L);
         when(service.getById(1L)).thenReturn(apartment);
         this.mockMvc
@@ -56,7 +56,7 @@ public class ApartmentControllerTest {
     }
 
     @Test
-    public void getAllRequest() throws Exception {
+    public void getAllRequestShouldReturnCorrectResult() throws Exception {
         Apartment apartment = createApartment(1L);
         List<Apartment> list = new ArrayList<>();
         list.add(apartment);
@@ -71,7 +71,7 @@ public class ApartmentControllerTest {
     }
 
     @Test
-    public void createPostRequestAnd() throws Exception {
+    public void createPostRequestShouldTransferCorrectData() throws Exception {
         ArgumentCaptor<Apartment> captor = ArgumentCaptor.forClass(Apartment.class);
         this.mockMvc.perform(post("/apartment")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"id\":\"1\",\"name\":\"Test\",\"description\":\"Test\"}"))
@@ -84,7 +84,7 @@ public class ApartmentControllerTest {
     }
 
     @Test
-    public void deleteRequest() throws Exception {
+    public void deleteRequestShouldTransferCorrectData() throws Exception {
         ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
         this.mockMvc.perform(delete("/apartment/{id}", 1L))
                 .andDo(print()).andExpect(status().isOk());

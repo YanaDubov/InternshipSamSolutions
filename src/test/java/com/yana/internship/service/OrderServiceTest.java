@@ -15,6 +15,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -31,16 +32,19 @@ public class OrderServiceTest {
     UserRepository userRepository;
     @Mock
     ApartmentRepository apartmentRepository;
+    @Mock
+    private User user;
+    @Mock
+    private Apartment apartment;
+    @Mock
+    private Order order;
 
     @Test
     public void createShouldReturnCorrectResult() {
         Long id = 1L;
         OrderDTO orderDTO = createOrderDTO(id);
-        User user = mock(User.class);
-        Apartment apartment = mock(Apartment.class);
-        when(apartmentRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(apartment));
-        when(userRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(user));
-        Order order = mock(Order.class);
+        when(apartmentRepository.findById(id)).thenReturn(Optional.ofNullable(apartment));
+        when(userRepository.findById(id)).thenReturn(Optional.ofNullable(user));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
         assertEquals(order, orderService.create(orderDTO));
     }
@@ -49,11 +53,8 @@ public class OrderServiceTest {
     public void createShouldCallRepository() {
         Long id = 1L;
         OrderDTO orderDTO = createOrderDTO(id);
-        User user = mock(User.class);
-        Apartment apartment = mock(Apartment.class);
         when(apartmentRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(apartment));
         when(userRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(user));
-        Order order = mock(Order.class);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
         orderService.create(orderDTO);
         verify(orderRepository).save(any(Order.class));

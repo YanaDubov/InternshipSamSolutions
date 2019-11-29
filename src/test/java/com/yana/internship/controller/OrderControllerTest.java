@@ -37,6 +37,7 @@ public class OrderControllerTest {
     private MockMvc mockMvc;
     @MockBean
     OrderService service;
+    private final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Before
     public void setup() {
@@ -44,8 +45,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    public void createPostRequest() throws Exception {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public void createPostRequestShouldReturnCorrectResult() throws Exception {
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC-3"));
         Date testDate = isoFormat.parse("2010-05-20 00:00:00");
         ArgumentCaptor<OrderDTO> captor = ArgumentCaptor.forClass(OrderDTO.class);
@@ -61,7 +61,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    public void deleteRequest() throws Exception {
+    public void deleteRequestShouldReturnCorrectResult() throws Exception {
         ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
         this.mockMvc.perform(delete("/order/{id}", 1L))
                 .andDo(print()).andExpect(status().isOk());

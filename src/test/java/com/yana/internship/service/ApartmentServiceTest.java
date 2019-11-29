@@ -4,10 +4,7 @@ import com.yana.internship.entity.Address;
 import com.yana.internship.entity.Apartment;
 import com.yana.internship.entity.Image;
 import com.yana.internship.entity.Tariff;
-import com.yana.internship.repository.AddressRepository;
-import com.yana.internship.repository.ApartmentRepository;
-import com.yana.internship.repository.ImageRepository;
-import com.yana.internship.repository.TariffRepository;
+import com.yana.internship.repository.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,6 +34,14 @@ public class ApartmentServiceTest {
     AddressRepository addressRepository;
     @Mock
     ImageRepository imageRepository;
+    @Mock
+    ApartmentSpecificationBuilder apartmentSpecificationBuilder;
+    @Mock
+    Tariff tariff;
+    @Mock
+    Address address;
+    @Mock
+    List<Image> imageList;
 
     @Test
     public void createShouldReturnCorrectResult() {
@@ -46,11 +51,35 @@ public class ApartmentServiceTest {
     }
 
     @Test
-    public void createShouldCallRepository() {
+    public void createShouldCallTariffRepository() {
+        Apartment apartment = createApartment();
+        when(apartmentRepository.save(apartment)).thenReturn(apartment);
+        apartmentService.create(apartment);
+        verify(tariffRepository).save(tariff);
+    }
+
+    @Test
+    public void createShouldCallAddressRepository() {
+        Apartment apartment = createApartment();
+        when(apartmentRepository.save(apartment)).thenReturn(apartment);
+        apartmentService.create(apartment);
+        verify(addressRepository).save(address);
+    }
+
+    @Test
+    public void createShouldCallApartmentRepository() {
         Apartment apartment = createApartment();
         when(apartmentRepository.save(apartment)).thenReturn(apartment);
         apartmentService.create(apartment);
         verify(apartmentRepository).save(apartment);
+    }
+
+    @Test
+    public void createShouldCallImageRepository() {
+        Apartment apartment = createApartment();
+        when(apartmentRepository.save(apartment)).thenReturn(apartment);
+        apartmentService.create(apartment);
+        verify(imageRepository).saveAll(imageList);
     }
 
     @Test
@@ -73,7 +102,9 @@ public class ApartmentServiceTest {
     @Test
     public void getAllShouldCallRepository() {
         List<Apartment> apartments = mock(List.class);
-        when(apartmentRepository.findAll(any(Specification.class))).thenReturn(apartments);
+        Specification specification = mock(Specification.class);
+        when(apartmentSpecificationBuilder.apartmentByCountryAndDate(null, null, null)).thenReturn(specification);
+        when(apartmentRepository.findAll(any((Specification.class)))).thenReturn(apartments);
         apartmentService.getAll(null, null, null);
         verify(apartmentRepository).findAll(any(Specification.class));
     }
@@ -81,19 +112,18 @@ public class ApartmentServiceTest {
     @Test
     public void getAllShouldReturnCorrectResult() {
         List<Apartment> apartments = mock(List.class);
-        when(apartmentRepository.findAll(any(Specification.class))).thenReturn(apartments);
+        Specification specification = mock(Specification.class);
+        when(apartmentSpecificationBuilder.apartmentByCountryAndDate(null, null, null)).thenReturn(specification);
+        when(apartmentRepository.findAll(any((Specification.class)))).thenReturn(apartments);
         assertEquals(apartments, apartmentService.getAll(null, null, null));
     }
 
     private Apartment createApartment() {
         Apartment apartment = new Apartment();
-        Tariff tariff = mock(Tariff.class);
         when(tariffRepository.save(tariff)).thenReturn(tariff);
         apartment.setTariff(tariff);
-        Address address = mock(Address.class);
         when(addressRepository.save(address)).thenReturn(address);
         apartment.setAddress(address);
-        List<Image> imageList = mock(List.class);
         when(imageRepository.saveAll(imageList)).thenReturn(imageList);
         apartment.setImages(imageList);
         return apartment;

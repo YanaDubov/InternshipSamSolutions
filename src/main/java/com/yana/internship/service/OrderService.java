@@ -7,6 +7,8 @@ import com.yana.internship.entity.User;
 import com.yana.internship.repository.ApartmentRepository;
 import com.yana.internship.repository.OrderRepository;
 import com.yana.internship.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final ApartmentRepository apartmentRepository;
+    private static final Logger logger = LoggerFactory.getLogger(FileService.class);
 
     @Autowired
     public OrderService(OrderRepository orderRepository, UserRepository userRepository, ApartmentRepository apartmentRepository) {
@@ -27,9 +30,9 @@ public class OrderService {
     }
 
     public Order create(OrderDTO orderDTO) {
+        logger.info("Create order");
         Apartment apartment = apartmentRepository.findById(orderDTO.getApartmentId()).get();
         Order order = new Order();
-        order.setId(orderDTO.getId());
         order.setApartment(apartment);
         order.setCreationDate(orderDTO.getCreationDate());
         order.setCheckInDate(orderDTO.getCheckInDate());
@@ -41,5 +44,6 @@ public class OrderService {
 
     public void delete(Long id) {
         orderRepository.deleteById(id);
+        logger.info("Delete order with id {}", id);
     }
 }

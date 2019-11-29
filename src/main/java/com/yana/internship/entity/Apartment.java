@@ -3,7 +3,6 @@ package com.yana.internship.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
@@ -33,11 +32,11 @@ public class Apartment {
             joinColumns = @JoinColumn(name = "apartment_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id")
     )
-    private List<Image> images = new ArrayList<>();
+    private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "apartment")
     @JsonProperty(access = WRITE_ONLY)
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders;
 
     public List<Order> getOrders() {
         return orders;

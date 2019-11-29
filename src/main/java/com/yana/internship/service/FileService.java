@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -20,14 +21,18 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public File downloadByUrl(String url) {
+    public byte[] downloadByUrl(String url) {
         logger.info("Download file by url {}", url);
-        return fileRepository.findByUrl(url);
+        File file = fileRepository.findByUrl(url);
+        return file.getFile();
     }
 
-    public File uploadFile(File file) {
-        logger.info("Upload file with id {}", file.getId());
-        return fileRepository.save(file);
+    public String uploadFile(byte[] content) {
+        File file = new File();
+        file.setFile(content);
+        file.setUrl(UUID.randomUUID().toString());
+        logger.info("Upload file");
+        return fileRepository.save(file).getUrl();
     }
 
 }

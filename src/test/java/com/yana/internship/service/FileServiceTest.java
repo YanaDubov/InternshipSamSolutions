@@ -23,33 +23,47 @@ public class FileServiceTest {
 
     @Test
     public void uploadShouldReturnCorrectResult() {
-        File file = mock(File.class);
-        when(fileRepository.save(file)).thenReturn(file);
-        assertEquals(file, fileService.uploadFile(file));
+        String url = "/";
+        byte[] fileBytes = new byte[0];
+        File file = createFile(url, fileBytes);
+        when(fileRepository.save(any(File.class))).thenReturn(file);
+        assertEquals(url, fileService.uploadFile(fileBytes));
     }
 
     @Test
     public void uploadShouldCallRepository() {
-        File file = mock(File.class);
-        when(fileRepository.save(file)).thenReturn(file);
-        fileService.uploadFile(file);
-        verify(fileRepository).save(file);
+        String url = "/";
+        byte[] fileBytes = new byte[0];
+        File file = createFile(url, fileBytes);
+        when(fileRepository.save(any(File.class))).thenReturn(file);
+        fileService.uploadFile(fileBytes);
+        verify(fileRepository).save(any(File.class));
     }
 
     @Test
     public void downloadByUrlShouldReturnCorrectResult() {
         String url = "/";
-        File file = mock(File.class);
+        byte[] fileBytes = new byte[0];
+        File file = createFile(url, fileBytes);
         when(fileRepository.findByUrl(url)).thenReturn(file);
-        assertEquals(file, fileService.downloadByUrl(url));
+        assertEquals(fileBytes, fileService.downloadByUrl(url));
     }
 
     @Test
     public void downloadByUrlShouldCallRepository() {
         String url = "/";
-        File file = mock(File.class);
+        byte[] fileBytes = new byte[0];
+        File file = createFile(url, fileBytes);
         when(fileRepository.findByUrl(url)).thenReturn(file);
         fileService.downloadByUrl(url);
         verify(fileRepository).findByUrl(url);
+    }
+
+    private File createFile(String url, byte[] fileBytes) {
+        File file = new File();
+        file.setId(1L);
+        file.setUrl(url);
+        file.setFile(fileBytes);
+        return file;
     }
 }

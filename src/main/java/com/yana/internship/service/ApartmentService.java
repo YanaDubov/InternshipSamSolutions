@@ -20,20 +20,22 @@ public class ApartmentService {
     private final TariffRepository tariffRepository;
     private final AddressRepository addressRepository;
     private final ImageRepository imageRepository;
+    private final ApartmentSpecificationBuilder apartmentSpecificationBuilder;
 
     @Autowired
-    public ApartmentService(ApartmentRepository apartmentRepository, TariffRepository tariffRepository, AddressRepository addressRepository, ImageRepository imageRepository) {
+    public ApartmentService(ApartmentRepository apartmentRepository, TariffRepository tariffRepository, AddressRepository addressRepository, ImageRepository imageRepository, ApartmentSpecificationBuilder apartmentSpecificationBuilder) {
         this.apartmentRepository = apartmentRepository;
         this.tariffRepository = tariffRepository;
         this.addressRepository = addressRepository;
         this.imageRepository = imageRepository;
+        this.apartmentSpecificationBuilder = apartmentSpecificationBuilder;
     }
 
     public Apartment create(Apartment apartment) {
+        logger.info("Create apartment");
         tariffRepository.save(apartment.getTariff());
         addressRepository.save(apartment.getAddress());
         imageRepository.saveAll(apartment.getImages());
-        logger.info("Create apartment with id {}", apartment.getId());
         return apartmentRepository.save(apartment);
     }
 
@@ -51,8 +53,7 @@ public class ApartmentService {
     }
 
     public List<Apartment> getAll(Country code, Date checkInDate, Date checkOutDate) {
-        List<Apartment> list = apartmentRepository.findAll(ApartmentSpecification.apartmentByCountry(code)
-                .or(ApartmentSpecification.apartmentByDate(checkInDate, checkOutDate)));
+        List<Apartment> list = apartmentRepository.findAll(apartmentSpecificationBuilder.apartmentByCountryAndDate(code, checkInDate, checkOutDate));
         logger.info("Get {} apartments", list.size());
         return list;
     }
