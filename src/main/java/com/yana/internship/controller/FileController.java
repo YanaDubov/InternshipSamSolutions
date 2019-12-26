@@ -31,5 +31,4 @@ public class FileController {
     public String uploadFile(@RequestBody byte[] file) {
         return fileService.uploadFile(file);
     }
-
 }

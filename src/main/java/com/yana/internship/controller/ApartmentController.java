@@ -3,11 +3,12 @@ package com.yana.internship.controller;
 import com.yana.internship.entity.Apartment;
 import com.yana.internship.entity.Country;
 import com.yana.internship.service.ApartmentService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,18 +24,18 @@ public class ApartmentController {
     @GetMapping
     public @ResponseBody
     List<Apartment> getAllByCountryAndDates(@RequestParam(required = false) Country code,
-                                            @RequestParam(required = false) Date checkInDate,
-                                            @RequestParam(required = false) Date checkOutDate) {
+                                            @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate checkInDate,
+                                            @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate checkOutDate) {
         return apartmentService.getAll(code, checkInDate, checkOutDate);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Apartment create(@RequestBody @Valid Apartment apartment) {
         return apartmentService.create(apartment);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void delete(@PathVariable Long id) {
         apartmentService.deleteById(id);
     }
