@@ -1,27 +1,27 @@
 CREATE TABLE IF NOT EXISTS user (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name varchar(20),
-    surname varchar(50),
-    email varchar(50),
-    password varchar (20),
-    salt varchar(20)
+    name varchar(20) NOT NULL,
+    surname varchar(50) NOT NULL ,
+    email varchar(50) NOT NULL,
+    password varchar (255) NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS role (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name varchar(20)
+    name varchar(20) NOT NULL
 );
 CREATE TABLE user_role(
     user_id int NOT NULL,
     role_id int NOT NULL,
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(id),
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(id) NOT NULL,
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS tariff (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cost_per_night DECIMAL
+    cost_per_night DECIMAL NOT NULL
 );
 CREATE TABLE IF NOT EXISTS image (
 
@@ -31,16 +31,16 @@ CREATE TABLE IF NOT EXISTS image (
 CREATE TABLE IF NOT EXISTS address (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    country varchar(50),
-    city varchar(50),
-    address varchar(128)
+    country varchar(50) NOT NULL,
+    city varchar(50) NOT NULL,
+    address varchar(128) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS apartment (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name varchar(50),
-    address_id int NOT NULL,
-    description varchar(255),
+    name varchar(50) NOT NULL,
+    address_id int NOT NULL NOT NULL,
+    description varchar(255) NOT NULL,
     tariff_id int NOT NULL,
     CONSTRAINT  fk_address FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT fk_tariff FOREIGN KEY (tariff_id) REFERENCES tariff(id)
@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS apartment (
 CREATE TABLE IF NOT EXISTS apartment_order (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    price int NOT NULL,
     apartment_id int NOT NULL,
     customer_id int NOT NULL,
     creation_date timestamp NOT NULL,
@@ -66,5 +67,5 @@ CREATE TABLE IF NOT EXISTS file (
 
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     url varchar(128) NOT NULL,
-    file blob NOT NULL
+    file MEDIUMBLOB NOT NULL
 );
