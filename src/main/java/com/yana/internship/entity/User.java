@@ -1,6 +1,9 @@
 package com.yana.internship.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -9,12 +12,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 2,max = 50)
+    @NotEmpty
     private String name;
+    @Size(min = 2,max = 50)
+    @NotEmpty
     private String surname;
+    @Email
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String password;
-    private String salt;
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
@@ -59,14 +68,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public List<Role> getRoles() {
