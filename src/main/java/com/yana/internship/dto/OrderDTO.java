@@ -1,14 +1,20 @@
 package com.yana.internship.dto;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 public class OrderDTO {
     private Long id;
-    private Date creationDate;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private int price;
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    private LocalDate creationDate;
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    private LocalDate checkInDate;
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    private LocalDate checkOutDate;
     private Long apartmentId;
-    private Long userId;
+    private String userEmail;
 
     public Long getId() {
         return id;
@@ -18,27 +24,35 @@ public class OrderDTO {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getCheckInDate() {
+    public LocalDate getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    public Date getCheckOutDate() {
+    public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
@@ -50,11 +64,11 @@ public class OrderDTO {
         this.apartmentId = apartmentId;
     }
 
-    public Long getUser() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUser(Long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
