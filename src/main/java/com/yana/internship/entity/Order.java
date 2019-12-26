@@ -3,7 +3,7 @@ package com.yana.internship.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "apartment_order")
@@ -12,18 +12,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int price;
+
     @CreationTimestamp
-    @Temporal(TemporalType.DATE)
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDate creationDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "check_in_date")
-    private Date checkInDate;
+    private LocalDate checkInDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "check_out_date")
-    private Date checkOutDate;
+    private LocalDate checkOutDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "apartment_id")
@@ -41,27 +40,35 @@ public class Order {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getCheckInDate() {
+    public LocalDate getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    public Date getCheckOutDate() {
+    public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
