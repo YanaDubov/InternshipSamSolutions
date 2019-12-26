@@ -204,7 +204,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (json) {
                     var order_info = $("#order_info")
-                    order_info.append("<h5 style='color: #007000'>Apartment successfully booked!</h5>")//todo admin contact
+                    order_info.append("<h5 style='color: #007000'>Apartment successfully booked! Administrator will contact you as soon as possible! </h5>")
                     $("#bookbtn").css("display", "none");
                     $("#ok").css("display", "block");
                 }
