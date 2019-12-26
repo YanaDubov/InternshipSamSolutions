@@ -12,8 +12,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -68,9 +68,9 @@ public class OrderRepositoryTest {
     private Order createTestEntity(Long id) {
         Order order = new Order();
         order.setId(id);
-        order.setCreationDate(new Date());
-        order.setCheckInDate(new Date());
-        order.setCheckOutDate(new Date());
+        order.setCreationDate(LocalDate.of(2000, 11, 11));
+        order.setCheckInDate(LocalDate.of(2000, 11, 11));
+        order.setCheckOutDate(LocalDate.of(2000, 11, 11));
 
         Apartment apartment = new Apartment();
         apartment.setId(id);
@@ -97,7 +97,6 @@ public class OrderRepositoryTest {
         user.setName("Test");
         user.setEmail("Test");
         user.setPassword("test");
-        user.setSalt("salt");
         user.setSurname("test");
         order.setUser(user);
         userRepository.save(user);

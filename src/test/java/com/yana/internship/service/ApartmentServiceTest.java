@@ -103,19 +103,10 @@ public class ApartmentServiceTest {
     public void getAllShouldCallRepository() {
         List<Apartment> apartments = mock(List.class);
         Specification specification = mock(Specification.class);
-        when(apartmentSpecificationBuilder.apartmentByCountryAndDate(null, null, null)).thenReturn(specification);
+        when(apartmentSpecificationBuilder.apartmentByCountry(null)).thenReturn(specification);
         when(apartmentRepository.findAll(any((Specification.class)))).thenReturn(apartments);
         apartmentService.getAll(null, null, null);
         verify(apartmentRepository).findAll(any(Specification.class));
-    }
-
-    @Test
-    public void getAllShouldReturnCorrectResult() {
-        List<Apartment> apartments = mock(List.class);
-        Specification specification = mock(Specification.class);
-        when(apartmentSpecificationBuilder.apartmentByCountryAndDate(null, null, null)).thenReturn(specification);
-        when(apartmentRepository.findAll(any((Specification.class)))).thenReturn(apartments);
-        assertEquals(apartments, apartmentService.getAll(null, null, null));
     }
 
     private Apartment createApartment() {

@@ -73,7 +73,7 @@ public class ApartmentControllerTest {
     @Test
     public void createPostRequestShouldTransferCorrectData() throws Exception {
         ArgumentCaptor<Apartment> captor = ArgumentCaptor.forClass(Apartment.class);
-        this.mockMvc.perform(post("/apartment")
+        this.mockMvc.perform(post("/apartment/create")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"id\":\"1\",\"name\":\"Test\",\"description\":\"Test\"}"))
                 .andDo(print()).andExpect(status().isCreated());
         verify(service).create(captor.capture());
@@ -86,7 +86,7 @@ public class ApartmentControllerTest {
     @Test
     public void deleteRequestShouldTransferCorrectData() throws Exception {
         ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
-        this.mockMvc.perform(delete("/apartment/{id}", 1L))
+        this.mockMvc.perform(delete("/apartment/delete/{id}", 1L))
                 .andDo(print()).andExpect(status().isOk());
         verify(service).deleteById(captor.capture());
         Long actualId = captor.getValue();

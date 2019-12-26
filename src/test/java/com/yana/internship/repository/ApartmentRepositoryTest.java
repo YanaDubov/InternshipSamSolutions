@@ -2,7 +2,10 @@ package com.yana.internship.repository;
 
 import com.yana.internship.config.JpaConfig;
 import com.yana.internship.config.WebConfig;
-import com.yana.internship.entity.*;
+import com.yana.internship.entity.Address;
+import com.yana.internship.entity.Apartment;
+import com.yana.internship.entity.Country;
+import com.yana.internship.entity.Tariff;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;

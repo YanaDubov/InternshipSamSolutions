@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -43,20 +43,22 @@ public class OrderServiceTest {
     public void createShouldReturnCorrectResult() {
         Long id = 1L;
         OrderDTO orderDTO = createOrderDTO(id);
+        String email = "test";
         when(apartmentRepository.findById(id)).thenReturn(Optional.ofNullable(apartment));
-        when(userRepository.findById(id)).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findByEmail(email)).thenReturn(user);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
-        assertEquals(order, orderService.create(orderDTO));
+        assertEquals(order, orderService.create(orderDTO, email));
     }
 
     @Test
     public void createShouldCallRepository() {
         Long id = 1L;
         OrderDTO orderDTO = createOrderDTO(id);
+        String email = "test";
         when(apartmentRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(apartment));
-        when(userRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(user));
+        when(userRepository.findByEmail(email)).thenReturn(user);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
-        orderService.create(orderDTO);
+        orderService.create(orderDTO, email);
         verify(orderRepository).save(any(Order.class));
     }
 
@@ -67,14 +69,14 @@ public class OrderServiceTest {
     }
 
     private OrderDTO createOrderDTO(Long id) {
-        Date date = mock(Date.class);
+        LocalDate date = mock(LocalDate.class);
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(id);
         orderDTO.setApartmentId(id);
         orderDTO.setCheckInDate(date);
         orderDTO.setCheckOutDate(date);
         orderDTO.setCreationDate(date);
-        orderDTO.setUser(id);
+        orderDTO.setUserEmail("Test");
         return orderDTO;
     }
 }

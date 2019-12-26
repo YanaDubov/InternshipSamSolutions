@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebConfig.class, JpaConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +30,7 @@ public class TariffRepositoryTest {
         Tariff createdTariff = tariffRepository.save(createTestEntity(1L));
         assertTrue(tariffRepository.existsById(createdTariff.getId()));
     }
+
     @Test
     public void createAndGetByIdEntity() {
         Tariff createdTariff = tariffRepository.save(createTestEntity(1L));
